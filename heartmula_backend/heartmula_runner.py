@@ -1,7 +1,14 @@
 import subprocess
 import os
+import sys
 import uuid
 from pathlib import Path
+try:
+    import torch
+    HAS_CUDA = torch.cuda.is_available()
+except ImportError:
+    HAS_CUDA = False
+
 from config import (
     HEARTMULA_PROJECT_ROOT, 
     HEARTMULA_LYRICS_PATH, 
@@ -42,8 +49,10 @@ def run_heartmula_generation(request: SongRequest) -> str:
     # Duration in ms
     max_audio_length_ms = request.duration_seconds * 1000
     
+    device = "cuda" if HAS_CUDA else "cpu"
+    
     cmd = [
-        "python", script_path,
+        sys.executable, script_path,
         "--model_path", model_path,
         "--lyrics", HEARTMULA_LYRICS_PATH,
         "--tags", HEARTMULA_TAGS_PATH,
@@ -51,7 +60,9 @@ def run_heartmula_generation(request: SongRequest) -> str:
         "--version", version,
         "--max_audio_length_ms", str(max_audio_length_ms),
         "--lazy_load", "true",
-        "--cfg_scale", "2.0" # Increased CFG scale for better tag adherence
+        "--cfg_scale", "2.0", # Increased CFG scale for better tag adherence
+        "--mula_device", device,
+        "--codec_device", device
     ]
     
     print(f"Running command: {' '.join(cmd)}")
