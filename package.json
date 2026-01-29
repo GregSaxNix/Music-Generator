@@ -1,0 +1,10 @@
+{
+    "name": "music-generator",
+    "version": "1.0.0",
+    "description": "HeartMuLa Music Generator Studio",
+    "scripts": {
+        "start": "powershell -ExecutionPolicy Bypass -File ./start_app.ps1"
+    },
+    "author": "Antigravity",
+    "license": "ISC"
+}
