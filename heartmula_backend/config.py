@@ -14,7 +14,8 @@ HEARTMULA_TAGS_PATH = os.getenv("HEARTMULA_TAGS_PATH", str(BASE_DIR / "assets" /
 HEARTMULA_OUTPUT_DIR = Path(os.getenv("HEARTMULA_OUTPUT_DIR", str(BASE_DIR / "Output")))
 HEARTMULA_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Ollama Config
+# Ollama Config. If OLLAMA_MODEL changes, update comments and docs that name
+# the tag in the same change (.cursor/rules/local-model-updates.mdc).
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
 

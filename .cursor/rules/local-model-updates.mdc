@@ -1,0 +1,10 @@
+---
+description: When the lyrics model changes, update the Ollama default and any note that names it
+alwaysApply: true
+---
+
+# Keep local model references current
+
+Lyrics use `llama3.2` via `heartmula_backend/config.py` (`OLLAMA_MODEL`). If that pin changes, update the default and any comment or doc that names the tag, in the same change.
+
+Do not switch this to a general chat model as part of a Paperclip lineup cleanup unless lyrics generation is meant to move. `llama3.2` stays installed for this job.
